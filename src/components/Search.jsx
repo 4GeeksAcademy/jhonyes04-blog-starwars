@@ -97,7 +97,7 @@ export const Search = () => {
                             )}
                         </>
                     ) : (
-                        <li className="list-group-item bg-dark text-muted">
+                        <li className="list-group-item bg-dark text-warning">
                             No existen resultados
                         </li>
                     )}
