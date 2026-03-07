@@ -17,7 +17,7 @@ export const CardList = ({ titulo, elementos }) => {
                     ))}
                 </div>
             ) : (
-                <h2 className="bg-title p-5 text-center text-warning fw-bold mt-5">
+                <h2 className="bg-semitransparente rounded-4 p-5 text-center text-warning fw-bold mt-5">
                     Aún no tienes favoritos
                 </h2>
             )}

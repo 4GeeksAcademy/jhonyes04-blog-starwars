@@ -2,6 +2,9 @@ import { Link, NavLink } from 'react-router-dom';
 import logoUrl from '../assets/img/logo-starwars.png';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 import { Search } from './Search';
+import { NavbarLink } from './NavbarLink';
+
+const MENU = ['Home', 'Personajes', 'Vehículos', 'Planetas'];
 
 export const Navbar = () => {
     const { store } = useGlobalReducer();
@@ -44,39 +47,13 @@ export const Navbar = () => {
                 {/* Menú */}
                 <div id="navbarStarWars" className="collapse navbar-collapse">
                     <div className="navbar-nav ms-auto gap-2">
-                        <NavLink
-                            to="/"
-                            className={({ isActive }) =>
-                                `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning' : 'btn-dark'}`
-                            }
-                        >
-                            Home
-                        </NavLink>
-                        <NavLink
-                            to="/personajes"
-                            className={({ isActive }) =>
-                                `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning' : 'btn-dark'}`
-                            }
-                        >
-                            Personajes
-                        </NavLink>
-                        <NavLink
-                            to="/vehiculos"
-                            className={({ isActive }) =>
-                                `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning' : 'btn-dark'}`
-                            }
-                        >
-                            Vehículos
-                        </NavLink>
-                        <NavLink
-                            to="/planetas"
-                            className={({ isActive }) =>
-                                `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning' : 'btn-dark'}`
-                            }
-                        >
-                            Planetas
-                        </NavLink>
-                        <NavLink
+                        <NavbarLink to="/" label="Home" />
+                        <NavbarLink to="/personajes" label="Personajes" />
+                        <NavbarLink to="/vehiculos" label="Vehículos" />
+                        <NavbarLink to="/planetas" label="Planetas" />
+                        <NavbarLink to="/favoritos" label="Favoritos" />
+
+                        {/* <NavLink
                             to="/favoritos"
                             className={({ isActive }) =>
                                 `btn border-warning w-100 w-lg-auto d-flex align-items-center justify-content-center ${isActive ? 'btn-warning' : 'btn-dark'}`
@@ -84,7 +61,9 @@ export const Navbar = () => {
                         >
                             {({ isActive }) => (
                                 <>
-                                    Favoritos
+                                    <i
+                                        className={`fa-solid fa-heart ${isActive ? 'text-dark' : 'text-warning'}`}
+                                    ></i>
                                     <span
                                         className={`badge border ms-2 ${isActive ? 'bg-dark text-warning border-warning' : 'bg-warning text-dark border-dark'}`}
                                     >
@@ -92,7 +71,7 @@ export const Navbar = () => {
                                     </span>
                                 </>
                             )}
-                        </NavLink>
+                        </NavLink> */}
                     </div>
                 </div>
                 {/* Fin Menú */}
