@@ -1,32 +1,73 @@
-export const initialStore=()=>{
-  return{
-    message: null,
-    todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      }
-    ]
-  }
-}
+export const initialStore = () => {
+    const personajesLocalStorage = localStorage.getItem('characters');
+    const vehiculosLocalStorage = localStorage.getItem('vehicles');
+    const planetasLocalStorage = localStorage.getItem('locations');
+    const favoritosLocalStorage = localStorage.getItem('swfavoritos');
+
+    return {
+        personajes: personajesLocalStorage
+            ? JSON.parse(personajesLocalStorage)
+            : [],
+        vehiculos: vehiculosLocalStorage
+            ? JSON.parse(vehiculosLocalStorage)
+            : [],
+        planetas: planetasLocalStorage ? JSON.parse(planetasLocalStorage) : [],
+        favoritos: favoritosLocalStorage
+            ? JSON.parse(favoritosLocalStorage)
+            : [],
+        busquedas: [],
+    };
+};
 
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
-    case 'add_task':
+    switch (action.type) {
+        case 'GET_CHARACTERS':
+            return {
+                ...store,
+                personajes: action.payload,
+            };
+        case 'GET_VEHICLES':
+            return {
+                ...store,
+                vehiculos: action.payload,
+            };
+        case 'GET_LOCATIONS':
+            return {
+                ...store,
+                planetas: action.payload,
+            };
+        case 'FAVORITOS':
+            let favoritosActualizados;
+            const existe = store.favoritos.find(
+                (favorito) => favorito._id === action.payload._id,
+            );
 
-      const { id,  color } = action.payload
+            if (existe) {
+                favoritosActualizados = store.favoritos.filter(
+                    (favorito) => favorito._id !== action.payload._id,
+                );
+            } else {
+                favoritosActualizados = [...store.favoritos, action.payload];
+            }
 
-      return {
-        ...store,
-        todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
-      };
-    default:
-      throw Error('Unknown action.');
-  }    
+            localStorage.setItem(
+                'swfavoritos',
+                JSON.stringify(favoritosActualizados),
+            );
+
+            const items = JSON.parse(localStorage.getItem('swfavoritos'));
+            if (items.length === 0) localStorage.removeItem('swfavoritos');
+
+            return {
+                ...store,
+                favoritos: favoritosActualizados,
+            };
+        case 'BUSQUEDAS':
+            return {
+                ...store,
+                busquedas: action.payload,
+            };
+        default:
+            return store;
+    }
 }

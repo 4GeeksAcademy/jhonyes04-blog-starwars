@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: url('./assets//img//fondo01.jpg') no-repeat right bottom/cover;
+    background-attachment: fixed;
+}
+
+::placeholder {
+    color: rgba(255, 193, 8, 0.7) !important;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.bg-semitransparente,
+.bg-title {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.bg-title {
+    border-radius: 50px;
+}
+
+.linea {
+    width: 90%;
+    height: 1px;
+    background: rgba(255, 193, 8, 0.7);
+    margin: 0 auto;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.centrar-pagina {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.carousel-indicators {
+    margin-bottom: 0;
+    bottom: 20px;
+}
+
+.miniatura {
+    object-fit: cover;
+    width: 50px;
+    height: 30px;
+    border: 1px solid lightgray;
+}

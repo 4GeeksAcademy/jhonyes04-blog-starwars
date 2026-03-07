@@ -1,16 +1,35 @@
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useEffect } from 'react';
+import useGlobalReducer from '../hooks/useGlobalReducer';
+import { getData } from '../services/starwars.api';
+import { HomeTexto } from '../components/HomeTexto';
+import { Carrusel } from '../components/Carrusel';
 
 export const Home = () => {
+    const { store, dispatch } = useGlobalReducer();
 
-  const {store, dispatch} =useGlobalReducer()
+    useEffect(() => {
+        const obtenerDatos = async () => {
+            try {
+                await getData(dispatch, 'characters');
+                await getData(dispatch, 'vehicles');
+                await getData(dispatch, 'locations');
+            } catch (error) {
+                console.error('Error al botener todos los datos:', error);
+            }
+        };
 
-	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-		</div>
-	);
-}; 
+        obtenerDatos();
+    }, []);
+    return (
+        <div className="container bg-title text-center text-warning p-4 my-4">
+            <div className="row align-items-center">
+                <div className="col-12 col-lg-6">
+                    <Carrusel store={store} />
+                </div>
+                <div className="col-12 col-lg-6">
+                    <HomeTexto />
+                </div>
+            </div>
+        </div>
+    );
+};
