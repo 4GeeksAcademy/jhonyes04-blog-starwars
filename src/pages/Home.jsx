@@ -21,7 +21,7 @@ export const Home = () => {
         obtenerDatos();
     }, []);
     return (
-        <div className="container bg-title text-center text-warning p-4 my-4">
+        <div className="container bg-semitransparente rounded-4 text-center text-warning p-3 my-3">
             <div className="row align-items-center">
                 <div className="col-12 col-lg-6">
                     <Carrusel store={store} />

@@ -5,17 +5,17 @@ import { Footer } from '../components/Footer';
 // Base component that maintains the navbar and footer throughout the page and the scroll to top functionality.
 export const Layout = () => {
     return (
-        <>
-            <header className="sticky-top">
+        <div className="d-flex flex-column min-vh-100">
+            <div className="sticky-top">
                 <Navbar />
-            </header>
+            </div>
             {/* <div className="linea"></div> */}
-            <main className="flex-grow-1">
+            <div className="flex-grow-1">
                 <Outlet />
-            </main>
+            </div>
             <footer>
                 <Footer />
             </footer>
-        </>
+        </div>
     );
 };
