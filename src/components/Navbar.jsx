@@ -20,6 +20,7 @@ export const Navbar = () => {
                         />
                     </span>
                 </Link>
+                <Search />
                 <div className="d-flex flex-colum align-items-center gap-2">
                     <NavLink
                         to="/"
@@ -79,7 +80,6 @@ export const Navbar = () => {
                         )}
                     </NavLink>
                 </div>
-                <Search />
             </div>
         </nav>
     );
