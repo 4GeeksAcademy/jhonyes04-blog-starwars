@@ -44,10 +44,7 @@ export const Search = () => {
     };
 
     return (
-        <div
-            className="bg-transparent position-relative"
-            style={{ width: '400px' }}
-        >
+        <div className="bg-transparent position-relative">
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="input-group">
                     <span className="input-group-text bg-warning border-end-0">

@@ -11,7 +11,7 @@ export const CardList = ({ titulo, elementos }) => {
                 </h1>
             </div>
             {elementos.length > 0 ? (
-                <div className="card-body row g-4">
+                <div className="card-body row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                     {elementos.map((elemento) => (
                         <Card key={elemento._id} elemento={elemento} />
                     ))}
