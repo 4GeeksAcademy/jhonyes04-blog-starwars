@@ -14,7 +14,7 @@ export const Home = () => {
                 await getData(dispatch, 'vehicles');
                 await getData(dispatch, 'locations');
             } catch (error) {
-                console.error('Error al botener todos los datos:', error);
+                console.error('Error al obtener todos los datos:', error);
             }
         };
 

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import useGlobalReducer from '../hooks/useGlobalReducer';
 import { useEffect, useRef, useState } from 'react';
 
 const NUMERO_IMAGENES = 6;
@@ -11,19 +10,33 @@ export const Carrusel = ({ store }) => {
     const [cargando, setCargando] = useState(true);
     const generado = useRef(false);
 
+    const obtenerAleatorios = (elementos, numeroElementos) => {
+        const copiaElementos = [...elementos];
+        // Algoritmo Fisher-Yates
+        for (let i = copiaElementos.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [copiaElementos[i], copiaElementos[j]] = [
+                copiaElementos[j],
+                copiaElementos[i],
+            ];
+        }
+        return copiaElementos.slice(-numeroElementos);
+    };
+
     useEffect(() => {
-        if (!generado.current) {
+        const datosCargados =
+            personajes.length > 0 &&
+            vehiculos.length > 0 &&
+            planetas.length > 0;
+
+        if (!generado.current && datosCargados) {
             const todos = [...personajes, ...vehiculos, ...planetas];
 
-            if (todos.length > 0) {
-                const aleatorios = [...todos]
-                    .sort(() => Math.random() - 0.5)
-                    .slice(0, NUMERO_IMAGENES);
+            const aleatorios = obtenerAleatorios(todos, NUMERO_IMAGENES);
 
-                setSeleccion(aleatorios);
-                generado.current = true;
-                setCargando(false);
-            }
+            setSeleccion(aleatorios);
+            generado.current = true;
+            setCargando(false);
         }
     }, [personajes, vehiculos, planetas]);
 
