@@ -11,7 +11,7 @@ export const NavbarLink = ({ to, label = '' }) => {
             <NavLink
                 to="/favoritos"
                 className={({ isActive }) =>
-                    `btn border-warning w-100 w-lg-auto d-flex align-items-center justify-content-center ${isActive ? 'btn-warning' : 'btn-dark'}`
+                    `btn border-warning w-100 w-lg-auto d-flex align-items-center justify-content-center ${isActive ? 'btn-warning' : 'btn-dark bg-transparent'}`
                 }
             >
                 {({ isActive }) => (
@@ -34,7 +34,7 @@ export const NavbarLink = ({ to, label = '' }) => {
         <NavLink
             to={to}
             className={({ isActive }) =>
-                `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning text-dark fw-bold' : 'btn-dark text-warning'}`
+                `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning text-dark fw-bold' : 'btn-dark bg-transparent text-warning'}`
             }
         >
             {label}
