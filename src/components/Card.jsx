@@ -38,19 +38,14 @@ export const Card = ({ elemento }) => {
                     <div className="d-flex justify-content-between mt-auto">
                         <Link
                             to={`/details/${_id}`}
-                            className="btn btn-outline-primary"
-                        >
-                            Leer más
-                        </Link>
-                        {/* <button
-                            onClick={() => handleClickFavorito(elemento)}
                             className="btn btn-outline-warning"
-                        > */}
+                        >
+                            <i className="fa-solid fa-circle-info"></i>
+                        </Link>
                         <i
                             onClick={() => handleClickFavorito(elemento)}
                             className={`${esFavorito ? 'fa-solid' : 'fa-regular'} fa-heart fa-2x text-warning align-self-center cursor-pointer`}
                         ></i>
-                        {/* </button> */}
                     </div>
                 </div>
             </div>

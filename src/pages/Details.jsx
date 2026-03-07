@@ -47,18 +47,14 @@ export const Details = ({ pagina }) => {
                     <div className="d-flex justify-content-end gap-2">
                         <button
                             onClick={() => navigate(-1)}
-                            className="btn btn-outline-primary"
+                            className="btn btn-outline-warning"
                         >
                             <i className="fa-solid fa-circle-left"></i>
                         </button>
-                        <button
+                        <i
                             onClick={() => handleClickFavorito(detalles)}
-                            className="btn btn-outline-warning"
-                        >
-                            <i
-                                className={`${esFavorito ? 'fa-solid' : 'fa-regular'} fa-heart`}
-                            ></i>
-                        </button>
+                            className={`${esFavorito ? 'fa-solid' : 'fa-regular'} fa-heart fa-2x text-warning align-self-center cursor-pointer`}
+                        ></i>
                     </div>
                 </div>
             </div>
