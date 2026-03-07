@@ -5,8 +5,7 @@ export const HomeTexto = () => {
         <>
             <h1 className="fw-bold">Episodio VIII</h1>
             <h3>El archivo de la fuerza</h3>
-            <hr className="linea my-4" />
-            <p>
+            <p className="mt-5">
                 Es un período de renacimiento galáctico. Tras la caída del
                 Imperio, los registros de los héroes, villanos y mundos que
                 dieron forma a la historia han sido esparcidos por los sistemas
