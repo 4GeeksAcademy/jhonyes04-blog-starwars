@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
+import { Badge } from '../components/Badge';
 
 export const Details = ({ pagina }) => {
     const { id } = useParams();
@@ -40,9 +41,15 @@ export const Details = ({ pagina }) => {
                         width={100}
                         height={350}
                     />
-                    <div className="position-absolute bottom-0 end-0 m-2 badge text-bg-warning">
+                    {/* <div className="position-absolute bottom-0 end-0 m-2 badge text-bg-warning">
                         {detalles.tipo}
-                    </div>
+                    </div> */}
+                    <Badge
+                        label={detalles.tipo}
+                        colorFondo={'bg-warning'}
+                        colorLabel={'text-dark'}
+                        posicion={'bottom-right'}
+                    />
                 </div>
                 <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{detalles.name}</h5>

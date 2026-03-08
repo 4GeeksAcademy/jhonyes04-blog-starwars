@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
-import { getData } from '../services/starwars.api';
+import { getData } from '../api/starwars.api';
 import { HomeTexto } from '../components/HomeTexto';
 import { Carrusel } from '../components/Carrusel';
 

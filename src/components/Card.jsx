@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
+import { Badge } from './Badge';
 
 export const Card = ({ elemento }) => {
     const { _id, name, description, image, tipo } = elemento;
@@ -33,9 +34,12 @@ export const Card = ({ elemento }) => {
                         width={100}
                         height={170}
                     />
-                    <p className="position-absolute bottom-0 end-0 m-2 badge text-bg-warning">
-                        {tipo}
-                    </p>
+                    <Badge
+                        label={tipo}
+                        colorFondo={'bg-warning'}
+                        colorLabel={'text-dark'}
+                        posicion={'bottom-right'}
+                    />
                 </div>
                 <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{name}</h5>

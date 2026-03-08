@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 import { Link, useNavigate } from 'react-router-dom';
 import { Home } from '../pages/Home';
+import { Badge } from './Badge';
 
 const ELEMENTOS_MOSTRAR = 5;
 
@@ -84,9 +85,14 @@ export const Search = () => {
                                                 {item.name}
                                             </p>
                                         </div>
-                                        <span className="badge text-bg-warning">
+                                        {/* <span className="badge text-bg-warning">
                                             {item.tipo}
-                                        </span>
+                                        </span> */}
+                                        <Badge
+                                            label={item.tipo}
+                                            colorFondo={'bg-warning'}
+                                            colorLabel={'text-dark'}
+                                        />
                                     </Link>
                                 </li>
                             ))}

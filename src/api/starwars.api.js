@@ -23,8 +23,8 @@ export const getData = async (dispatch, item) => {
 
             const data = await response.json();
 
-            const dataMasTipo = data.data.map((d) => ({
-                ...d,
+            const dataMasTipo = data.data.map((datos) => ({
+                ...datos,
                 tipo: NOMBRES_TIPO[item],
             }));
 
