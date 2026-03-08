@@ -65,7 +65,7 @@ export const Search = () => {
                         <>
                             {encontadosVisibles.map((item) => (
                                 <li
-                                    className="group-item list-group-item bg-dark text-warning border-secondary"
+                                    className="group-item list-group-item text-bg-dark border-warning"
                                     key={item._id}
                                 >
                                     <Link
@@ -84,7 +84,7 @@ export const Search = () => {
                                                 {item.name}
                                             </p>
                                         </div>
-                                        <span className="badge bg-warning text-dark">
+                                        <span className="badge text-bg-warning">
                                             {item.tipo}
                                         </span>
                                     </Link>
@@ -92,7 +92,7 @@ export const Search = () => {
                             ))}
 
                             {encontrados.length > ELEMENTOS_MOSTRAR && (
-                                <li className="group-item list-group-item bg-dark border-secondary">
+                                <li className="group-item list-group-item bg-dark border-warning">
                                     <button
                                         onClick={handleClickVerTodos}
                                         className="btn btn-warning w-100"
@@ -103,7 +103,7 @@ export const Search = () => {
                             )}
                         </>
                     ) : (
-                        <li className="list-group-item bg-dark text-warning">
+                        <li className="list-group-item bg-dark text-secondary border-warning">
                             No existen resultados
                         </li>
                     )}

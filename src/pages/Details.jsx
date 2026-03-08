@@ -40,7 +40,7 @@ export const Details = ({ pagina }) => {
                         width={100}
                         height={350}
                     />
-                    <div className="position-absolute bottom-0 end-0 m-2 badge bg-warning text-dark">
+                    <div className="position-absolute bottom-0 end-0 m-2 badge text-bg-warning">
                         {detalles.tipo}
                     </div>
                 </div>

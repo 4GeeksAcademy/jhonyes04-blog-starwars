@@ -20,7 +20,7 @@ export const NavbarLink = ({ to, label = '' }) => {
                             className={`fa-solid fa-heart ${isActive ? 'text-dark' : 'text-warning'}`}
                         ></i>
                         <span
-                            className={`badge border ms-2 ${isActive ? 'bg-dark text-warning border-warning' : 'bg-warning text-dark border-dark'}`}
+                            className={`badge border ms-2 ${isActive ? 'text-bg-dark border-warning' : 'text-bg-warning border-dark'}`}
                         >
                             {favoritos.length}
                         </span>

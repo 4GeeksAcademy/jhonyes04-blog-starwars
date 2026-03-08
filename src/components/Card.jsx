@@ -33,7 +33,7 @@ export const Card = ({ elemento }) => {
                         width={100}
                         height={170}
                     />
-                    <p className="position-absolute bottom-0 end-0 m-2 badge bg-warning text-dark">
+                    <p className="position-absolute bottom-0 end-0 m-2 badge text-bg-warning">
                         {tipo}
                     </p>
                 </div>
