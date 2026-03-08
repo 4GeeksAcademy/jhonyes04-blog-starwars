@@ -5,7 +5,7 @@ const NUMERO_IMAGENES = 6;
 const INTERVALO_CAMBIO_IMAGEN = 5000;
 
 export const Carrusel = ({ store }) => {
-    const { personajes, vehiculos, planetas } = store;
+    const { personajes, vehiculos, lugares } = store;
     const [seleccion, setSeleccion] = useState([]);
     const [cargando, setCargando] = useState(true);
     const generado = useRef(false);
@@ -25,12 +25,10 @@ export const Carrusel = ({ store }) => {
 
     useEffect(() => {
         const datosCargados =
-            personajes.length > 0 &&
-            vehiculos.length > 0 &&
-            planetas.length > 0;
+            personajes.length > 0 && vehiculos.length > 0 && lugares.length > 0;
 
         if (!generado.current && datosCargados) {
-            const todos = [...personajes, ...vehiculos, ...planetas];
+            const todos = [...personajes, ...vehiculos, ...lugares];
 
             const aleatorios = obtenerAleatorios(todos, NUMERO_IMAGENES);
 
@@ -38,7 +36,7 @@ export const Carrusel = ({ store }) => {
             generado.current = true;
             setCargando(false);
         }
-    }, [personajes, vehiculos, planetas]);
+    }, [personajes, vehiculos, lugares]);
 
     if (cargando) {
         return (

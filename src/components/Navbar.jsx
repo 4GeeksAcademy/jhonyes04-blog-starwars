@@ -1,15 +1,32 @@
 import { Link, NavLink } from 'react-router-dom';
 import logoUrl from '../assets/img/logo-starwars.png';
-import useGlobalReducer from '../hooks/useGlobalReducer';
 import { Search } from './Search';
 import { NavbarLink } from './NavbarLink';
 
-const MENU = ['Home', 'Personajes', 'Vehículos', 'Planetas'];
+const MENU = [
+    {
+        to: '/',
+        label: 'Home',
+    },
+    {
+        to: '/personajes',
+        label: 'Personajes',
+    },
+    {
+        to: '/vehiculos',
+        label: 'Vehículos',
+    },
+    {
+        to: '/lugares',
+        label: 'Lugares',
+    },
+    {
+        to: '/favoritos',
+        label: 'Favoritos',
+    },
+];
 
 export const Navbar = () => {
-    const { store } = useGlobalReducer();
-    const { favoritos } = store;
-
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-semitransparente top-0 z-3">
             <div className="container d-flex">
@@ -47,31 +64,13 @@ export const Navbar = () => {
                 {/* Menú */}
                 <div id="navbarStarWars" className="collapse navbar-collapse">
                     <div className="navbar-nav ms-auto gap-2">
-                        <NavbarLink to="/" label="Home" />
-                        <NavbarLink to="/personajes" label="Personajes" />
-                        <NavbarLink to="/vehiculos" label="Vehículos" />
-                        <NavbarLink to="/planetas" label="Planetas" />
-                        <NavbarLink to="/favoritos" label="Favoritos" />
-
-                        {/* <NavLink
-                            to="/favoritos"
-                            className={({ isActive }) =>
-                                `btn border-warning w-100 w-lg-auto d-flex align-items-center justify-content-center ${isActive ? 'btn-warning' : 'btn-dark'}`
-                            }
-                        >
-                            {({ isActive }) => (
-                                <>
-                                    <i
-                                        className={`fa-solid fa-heart ${isActive ? 'text-dark' : 'text-warning'}`}
-                                    ></i>
-                                    <span
-                                        className={`badge border ms-2 ${isActive ? 'bg-dark text-warning border-warning' : 'bg-warning text-dark border-dark'}`}
-                                    >
-                                        {favoritos.length}
-                                    </span>
-                                </>
-                            )}
-                        </NavLink> */}
+                        {MENU.map((item, index) => (
+                            <NavbarLink
+                                to={item.to}
+                                label={item.label}
+                                key={index}
+                            />
+                        ))}
                     </div>
                 </div>
                 {/* Fin Menú */}

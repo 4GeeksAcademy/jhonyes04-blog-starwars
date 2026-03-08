@@ -6,6 +6,12 @@ const TIPOS = {
     locations: 'GET_LOCATIONS',
 };
 
+const NOMBRES_TIPO = {
+    characters: 'Personaje',
+    vehicles: 'Vehículo',
+    locations: 'Lugar',
+};
+
 export const getData = async (dispatch, item) => {
     const datosLocales = localStorage.getItem(item);
 
@@ -17,17 +23,24 @@ export const getData = async (dispatch, item) => {
 
             const data = await response.json();
 
-            localStorage.setItem(item, JSON.stringify(data.data));
+            const dataMasTipo = data.data.map((d) => ({
+                ...d,
+                tipo: NOMBRES_TIPO[item],
+            }));
+
+            localStorage.setItem(item, JSON.stringify(dataMasTipo));
 
             dispatch({
                 type: TIPOS[item],
-                payload: data.data,
+                payload: dataMasTipo,
             });
 
-            return data.data;
+            return dataMasTipo;
         } catch (error) {
             console.error(`Error al obtener ${item}:`, error);
             return [];
         }
     }
+
+    return JSON.parse(datosLocales);
 };

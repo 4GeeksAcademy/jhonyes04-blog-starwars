@@ -7,7 +7,7 @@ const ELEMENTOS_MOSTRAR = 5;
 
 export const Search = () => {
     const { store, dispatch } = useGlobalReducer();
-    const { personajes, vehiculos, planetas } = store;
+    const { personajes, vehiculos, lugares } = store;
     const [encontrados, setEncontrados] = useState([]);
     const [busqueda, setBusqueda] = useState('');
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ export const Search = () => {
     const todosElementos = [
         ...(personajes || []),
         ...(vehiculos || []),
-        ...(planetas || []),
+        ...(lugares || []),
     ];
 
     useEffect(() => {
@@ -65,21 +65,28 @@ export const Search = () => {
                         <>
                             {encontadosVisibles.map((item) => (
                                 <li
-                                    className="group-item list-group-item bg-dark text-warning border-secondary "
+                                    className="group-item list-group-item bg-dark text-warning border-secondary"
                                     key={item._id}
                                 >
                                     <Link
                                         to={`/details/${item._id}`}
-                                        className="text-decoration-none text-warning d-blod"
+                                        className="d-flex justify-content-between align-items-center text-decoration-none  text-small"
                                         onClick={() => setBusqueda('')}
                                     >
-                                        <img
-                                            src={item.image}
-                                            alt={item.name}
-                                            className="img-fluid me-2"
-                                            width={50}
-                                        />
-                                        {item.name}
+                                        <div className="d-flex align-items-center">
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="img-fluid me-2"
+                                                width={50}
+                                            />
+                                            <p className="text-warning m-0">
+                                                {item.name}
+                                            </p>
+                                        </div>
+                                        <span className="badge bg-warning text-dark">
+                                            {item.tipo}
+                                        </span>
                                     </Link>
                                 </li>
                             ))}
@@ -90,8 +97,7 @@ export const Search = () => {
                                         onClick={handleClickVerTodos}
                                         className="btn btn-warning w-100"
                                     >
-                                        Ver todos los resultados (
-                                        {encontrados.length})
+                                        Ver todos ({encontrados.length})
                                     </button>
                                 </li>
                             )}

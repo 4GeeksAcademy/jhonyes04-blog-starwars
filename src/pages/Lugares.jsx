@@ -1,13 +1,13 @@
 import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 import { CardList } from '../components/CardList.jsx';
 
-export const Planetas = () => {
+export const Lugares = () => {
     const { store } = useGlobalReducer();
-    const { planetas } = store;
+    const { lugares } = store;
 
     return (
         <>
-            <CardList titulo="Planetas" elementos={planetas} />
+            <CardList titulo="Lugares" elementos={lugares} />
         </>
     );
 };

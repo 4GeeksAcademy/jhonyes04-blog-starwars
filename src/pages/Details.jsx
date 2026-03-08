@@ -6,17 +6,17 @@ export const Details = ({ pagina }) => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { store, dispatch } = useGlobalReducer();
-    const { personajes, vehiculos, planetas, favoritos } = store;
+    const { personajes, vehiculos, lugares, favoritos } = store;
     const [detalles, setDetalles] = useState(null);
 
     useEffect(() => {
-        const todos = [...personajes, ...vehiculos, ...planetas];
+        const todos = [...personajes, ...vehiculos, ...lugares];
         const elementoEncontado = todos.find(
             (item) => String(item._id) === String(id),
         );
 
         setDetalles(elementoEncontado);
-    }, [id, personajes, vehiculos, planetas]);
+    }, [id, personajes, vehiculos, lugares]);
 
     if (!detalles) return <div className="container mt-5">Cargando...</div>;
 
@@ -30,15 +30,20 @@ export const Details = ({ pagina }) => {
     };
 
     return (
-        <div className="container w-50 my-5">
+        <div className="container my-5 details-card-max-width">
             <div className="card">
-                <img
-                    src={detalles.image}
-                    alt={detalles.name}
-                    className="card-img-top"
-                    width={100}
-                    height={380}
-                />
+                <div className="position-relative">
+                    <img
+                        src={detalles.image}
+                        alt={detalles.name}
+                        className="card-img-top"
+                        width={100}
+                        height={350}
+                    />
+                    <div className="position-absolute bottom-0 end-0 m-2 badge bg-warning text-dark">
+                        {detalles.tipo}
+                    </div>
+                </div>
                 <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{detalles.name}</h5>
                     <p className="card-text text-justify">

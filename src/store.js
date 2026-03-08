@@ -1,7 +1,7 @@
 export const initialStore = () => {
     const personajesLocalStorage = localStorage.getItem('characters');
     const vehiculosLocalStorage = localStorage.getItem('vehicles');
-    const planetasLocalStorage = localStorage.getItem('locations');
+    const lugaresLocalStorage = localStorage.getItem('locations');
     const favoritosLocalStorage = localStorage.getItem('swfavoritos');
 
     return {
@@ -11,7 +11,7 @@ export const initialStore = () => {
         vehiculos: vehiculosLocalStorage
             ? JSON.parse(vehiculosLocalStorage)
             : [],
-        planetas: planetasLocalStorage ? JSON.parse(planetasLocalStorage) : [],
+        lugares: lugaresLocalStorage ? JSON.parse(lugaresLocalStorage) : [],
         favoritos: favoritosLocalStorage
             ? JSON.parse(favoritosLocalStorage)
             : [],
@@ -34,7 +34,7 @@ export default function storeReducer(store, action = {}) {
         case 'GET_LOCATIONS':
             return {
                 ...store,
-                planetas: action.payload,
+                lugares: action.payload,
             };
         case 'FAVORITOS':
             let favoritosActualizados;

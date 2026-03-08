@@ -25,6 +25,10 @@ body {
     text-align: justify;
 }
 
+.text-small {
+    font-size: 0.8rem;
+}
+
 .bg-semitransparente,
 .bg-title {
     background: rgba(0, 0, 0, 0.7);
@@ -37,7 +41,7 @@ body {
 .linea {
     width: 90%;
     height: 1px;
-    background: rgba(255, 193, 8, 0.7);
+    background: rgb(255, 193, 8);
     margin: 0 auto;
 }
 
@@ -62,4 +66,9 @@ body {
     width: 50px;
     height: 30px;
     border: 1px solid lightgray;
+}
+
+.details-card-max-width {
+    max-width: 600px;
+    min-width: 400px;
 }

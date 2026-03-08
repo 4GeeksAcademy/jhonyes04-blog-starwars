@@ -11,7 +11,7 @@ import { Details } from './pages/Details';
 import { Error404 } from './pages/Error404';
 import { Personajes } from './pages/Personajes';
 import { Vehiculos } from './pages/Vehiculos';
-import { Planetas } from './pages/Planetas';
+import { Lugares } from './pages/Lugares';
 import { Favoritos } from './pages/Favoritos';
 import { Busquedas } from './pages/Busquedas';
 
@@ -29,7 +29,7 @@ export const router = createBrowserRouter(
             <Route path="/" element={<Home />} />
             <Route path="/personajes" index element={<Personajes />} />
             <Route path="/vehiculos" element={<Vehiculos />} />
-            <Route path="/planetas" element={<Planetas />} />
+            <Route path="/lugares" element={<Lugares />} />
             <Route path="/favoritos" element={<Favoritos />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/busquedas" element={<Busquedas />} />

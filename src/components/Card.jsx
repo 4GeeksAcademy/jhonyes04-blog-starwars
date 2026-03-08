@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 
 export const Card = ({ elemento }) => {
-    const { _id, name, description, image } = elemento;
+    const { _id, name, description, image, tipo } = elemento;
     const { store, dispatch } = useGlobalReducer();
     const { favoritos } = store;
 
@@ -25,13 +25,18 @@ export const Card = ({ elemento }) => {
     return (
         <div>
             <div className="card h-100">
-                <img
-                    src={image}
-                    alt={name}
-                    className="card-img-top"
-                    width={100}
-                    height={170}
-                />
+                <div className="position-relative">
+                    <img
+                        src={image}
+                        alt={name}
+                        className="card-img-top"
+                        width={100}
+                        height={170}
+                    />
+                    <p className="position-absolute bottom-0 end-0 m-2 badge bg-warning text-dark">
+                        {tipo}
+                    </p>
+                </div>
                 <div className="card-body d-flex flex-column">
                     <h5 className="card-title">{name}</h5>
                     <p className="card-text text-justify">{descripcionCorta}</p>

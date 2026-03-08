@@ -5,17 +5,31 @@ import { RouterProvider } from 'react-router-dom'; // Import RouterProvider to u
 import { router } from './routes'; // Import the router configuration
 import { StoreProvider } from './hooks/useGlobalReducer'; // Import the StoreProvider for global state management
 
-const Main = () => {
-    return (
-        <React.StrictMode>
-            {/* Provide global state to all components */}
-            <StoreProvider>
-                {/* Set up routing for the application */}
-                <RouterProvider router={router}></RouterProvider>
-            </StoreProvider>
-        </React.StrictMode>
-    );
-};
+const container = document.getElementById('root');
 
-// Render the Main component into the root DOM element.
-ReactDOM.createRoot(document.getElementById('root')).render(<Main />);
+const root = ReactDOM.createRoot(container);
+
+root.render(
+    <React.StrictMode>
+        {/* Provide global state to all components */}
+        <StoreProvider>
+            {/* Set up routing for the application */}
+            <RouterProvider router={router}></RouterProvider>
+        </StoreProvider>
+    </React.StrictMode>,
+);
+
+// const Main = () => {
+//     return (
+//         <React.StrictMode>
+//             {/* Provide global state to all components */}
+//             <StoreProvider>
+//                 {/* Set up routing for the application */}
+//                 <RouterProvider router={router}></RouterProvider>
+//             </StoreProvider>
+//         </React.StrictMode>
+//     );
+// };
+
+// // Render the Main component into the root DOM element.
+// ReactDOM.createRoot(document.getElementById('root')).render(<Main />);
