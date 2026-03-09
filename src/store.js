@@ -16,6 +16,7 @@ export const initialStore = () => {
             ? JSON.parse(favoritosLocalStorage)
             : [],
         busquedas: [],
+        filtroActivo: 'todos',
     };
 };
 
@@ -35,6 +36,11 @@ export default function storeReducer(store, action = {}) {
             return {
                 ...store,
                 lugares: action.payload,
+            };
+        case 'FILTRO':
+            return {
+                ...store,
+                filtroActivo: action.payload,
             };
         case 'FAVORITOS':
             let favoritosActualizados;
