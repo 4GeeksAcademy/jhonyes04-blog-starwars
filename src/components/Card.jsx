@@ -1,25 +1,11 @@
 import { Link } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 import { Badge } from './Badge';
-import { useEffect } from 'react';
 
 export const Card = ({ elemento }) => {
     const { _id, name, description, image, tipo } = elemento;
     const { store, dispatch } = useGlobalReducer();
     const { favoritos } = store;
-
-    useEffect(() => {
-        const tooltipTriggerList = document.querySelectorAll(
-            '[data-bs-toggle="tooltip"]',
-        );
-        const tooltipList = [...tooltipTriggerList].map(
-            (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
-        );
-
-        return () => {
-            tooltipList.forEach((tooltip) => tooltip.dispose());
-        };
-    }, []);
 
     const caracteres = 150;
 
@@ -62,18 +48,18 @@ export const Card = ({ elemento }) => {
                         <Link
                             to={`/details/${_id}`}
                             className="btn btn-outline-warning"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="Más información"
+                            title="Más información"
                         >
                             <i className="fa-solid fa-circle-info"></i>
                         </Link>
                         <i
                             onClick={() => handleClickFavorito(elemento)}
                             className={`${esFavorito ? 'fa-solid' : 'fa-regular'} fa-heart fa-2x text-warning align-self-center cursor-pointer`}
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title={`${esFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos'}`}
+                            title={
+                                esFavorito
+                                    ? 'Quitar de favoritos'
+                                    : 'Agregar a favoritos'
+                            }
                         ></i>
                     </div>
                 </div>
