@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 import { Badge } from '../components/Badge';
 
-export const Details = ({ pagina }) => {
+export const Details = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { store, dispatch } = useGlobalReducer();
@@ -28,7 +28,7 @@ export const Details = ({ pagina }) => {
         );
 
         return () => tooltipList.forEach((tooltip) => tooltip.dispose());
-    }, [id, favoritos]);
+    }, [detalles, favoritos]);
 
     if (!detalles) return <div className="container mt-5">Cargando...</div>;
 

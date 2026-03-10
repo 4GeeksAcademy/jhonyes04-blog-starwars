@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Card } from './Card';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 
@@ -12,6 +11,38 @@ export const CardList = ({ titulo, elementos }) => {
             : elementos.filter((elemento) =>
                   favoritos.some((favorito) => favorito._id === elemento._id),
               );
+
+    const renderizar = () => {
+        if (titulo.toLowerCase() !== 'favoritos' && elementos.length === 0) {
+            return (
+                <div className="d-flex flex-column align-items-center justify-content-center p-5">
+                    <div
+                        className="spinner-border text-warning mb-3"
+                        role="status"
+                    ></div>
+                    <h2 className="text-warning fw-bold">
+                        Cargando datos de la galaxia...
+                    </h2>
+                </div>
+            );
+        }
+
+        if (elementosFiltrados.length === 0) {
+            return (
+                <h2 className="bg-semitransparente rounded-4 p-5 text-center text-warning fw-bold mt-5">
+                    No tienes favoritos seleccionados
+                </h2>
+            );
+        }
+
+        return (
+            <div className="card-body row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                {elementosFiltrados.map((elemento) => (
+                    <Card key={elemento._id} elemento={elemento} />
+                ))}
+            </div>
+        );
+    };
 
     const handleClickAcambiarFiltro = (nuevoFiltro) => {
         dispatch({
@@ -45,17 +76,7 @@ export const CardList = ({ titulo, elementos }) => {
                     </div>
                 )}
             </div>
-            {elementosFiltrados.length > 0 ? (
-                <div className="card-body row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                    {elementosFiltrados.map((elemento) => (
-                        <Card key={elemento._id} elemento={elemento} />
-                    ))}
-                </div>
-            ) : (
-                <h2 className="bg-semitransparente rounded-4 p-5 text-center text-warning fw-bold mt-5">
-                    No tienes favoritos
-                </h2>
-            )}
+            {renderizar()}
         </div>
     );
 };
