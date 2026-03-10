@@ -12,35 +12,29 @@ const NOMBRES_TIPO = {
     locations: 'Lugar',
 };
 
-export const getData = async (dispatch, item) => {
-    const datosLocales = localStorage.getItem(item);
+export const getData = async (dispatch, item, page = 1, limit = 20) => {
+    try {
+        const response = await fetch(
+            URL_API + '/' + item + `?page=${page}&limit=${limit}`,
+        );
 
-    if (!datosLocales) {
-        try {
-            const response = await fetch(URL_API + '/' + item);
+        if (!response.ok) throw new Error(`Error al obtener ${item}`);
 
-            if (!response.ok) throw new Error(`Error al obtener ${item}`);
+        const data = await response.json();
 
-            const data = await response.json();
+        const dataMasTipo = data.data.map((datos) => ({
+            ...datos,
+            tipo: NOMBRES_TIPO[item],
+        }));
 
-            const dataMasTipo = data.data.map((datos) => ({
-                ...datos,
-                tipo: NOMBRES_TIPO[item],
-            }));
+        dispatch({
+            type: TIPOS[item],
+            payload: dataMasTipo,
+        });
 
-            localStorage.setItem(item, JSON.stringify(dataMasTipo));
-
-            dispatch({
-                type: TIPOS[item],
-                payload: dataMasTipo,
-            });
-
-            return dataMasTipo;
-        } catch (error) {
-            console.error(`Error al obtener ${item}:`, error);
-            return [];
-        }
+        return data;
+    } catch (error) {
+        console.error(`Error al obtener ${item}:`, error);
+        return [];
     }
-
-    return JSON.parse(datosLocales);
 };

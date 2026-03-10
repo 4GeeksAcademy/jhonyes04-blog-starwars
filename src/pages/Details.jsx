@@ -19,6 +19,17 @@ export const Details = ({ pagina }) => {
         setDetalles(elementoEncontado);
     }, [id, personajes, vehiculos, lugares]);
 
+    useEffect(() => {
+        const tooltipTriggerList = document.querySelectorAll(
+            '[data-bs-toggle="tooltip"]',
+        );
+        const tooltipList = [...tooltipTriggerList].map(
+            (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl),
+        );
+
+        return () => tooltipList.forEach((tooltip) => tooltip.dispose());
+    }, [id, favoritos]);
+
     if (!detalles) return <div className="container mt-5">Cargando...</div>;
 
     const esFavorito = favoritos.some((favorito) => favorito._id === id);
@@ -60,12 +71,22 @@ export const Details = ({ pagina }) => {
                         <button
                             onClick={() => navigate(-1)}
                             className="btn btn-outline-warning"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-bs-title="Volver atrás"
                         >
                             <i className="fa-solid fa-circle-left"></i>
                         </button>
                         <i
                             onClick={() => handleClickFavorito(detalles)}
                             className={`${esFavorito ? 'fa-solid' : 'fa-regular'} fa-heart fa-2x text-warning align-self-center cursor-pointer`}
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            data-bs-title={
+                                esFavorito
+                                    ? 'Quitar de favoritos'
+                                    : 'Agregar a favoritos'
+                            }
                         ></i>
                     </div>
                 </div>

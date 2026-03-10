@@ -1,79 +1,66 @@
 export const initialStore = () => {
-    const personajesLocalStorage = localStorage.getItem('characters');
-    const vehiculosLocalStorage = localStorage.getItem('vehicles');
-    const lugaresLocalStorage = localStorage.getItem('locations');
-    const favoritosLocalStorage = localStorage.getItem('swfavoritos');
+    const storeLocal = localStorage.getItem('galaxia_starwars');
+
+    if (storeLocal) return JSON.parse(storeLocal);
 
     return {
-        personajes: personajesLocalStorage
-            ? JSON.parse(personajesLocalStorage)
-            : [],
-        vehiculos: vehiculosLocalStorage
-            ? JSON.parse(vehiculosLocalStorage)
-            : [],
-        lugares: lugaresLocalStorage ? JSON.parse(lugaresLocalStorage) : [],
-        favoritos: favoritosLocalStorage
-            ? JSON.parse(favoritosLocalStorage)
-            : [],
+        personajes: [],
+        vehiculos: [],
+        lugares: [],
+        favoritos: [],
         busquedas: [],
         filtroActivo: 'todos',
     };
 };
 
 export default function storeReducer(store, action = {}) {
+    let siguienteEstado;
     switch (action.type) {
         case 'GET_CHARACTERS':
-            return {
-                ...store,
-                personajes: action.payload,
-            };
+            siguienteEstado = { ...store, personajes: action.payload };
+            break;
         case 'GET_VEHICLES':
-            return {
-                ...store,
-                vehiculos: action.payload,
-            };
+            siguienteEstado = { ...store, vehiculos: action.payload };
+            break;
         case 'GET_LOCATIONS':
-            return {
-                ...store,
-                lugares: action.payload,
-            };
+            siguienteEstado = { ...store, lugares: action.payload };
+            break;
         case 'FILTRO':
-            return {
-                ...store,
-                filtroActivo: action.payload,
-            };
+            siguienteEstado = { ...store, filtroActivo: action.payload };
+            break;
         case 'FAVORITOS':
-            let favoritosActualizados;
             const existe = store.favoritos.find(
                 (favorito) => favorito._id === action.payload._id,
             );
+            const favoritosActualizados = existe
+                ? store.favoritos.filter(
+                      (favorito) => favorito._id !== action.payload._id,
+                  )
+                : [...store.favoritos, action.payload];
 
-            if (existe) {
-                favoritosActualizados = store.favoritos.filter(
-                    (favorito) => favorito._id !== action.payload._id,
-                );
-            } else {
-                favoritosActualizados = [...store.favoritos, action.payload];
+            let nuevoFiltro = store.filtroActivo;
+
+            if (
+                favoritosActualizados.length === 0 &&
+                store.filtroActivo === 'favoritos'
+            ) {
+                nuevoFiltro = 'todos';
             }
 
-            localStorage.setItem(
-                'swfavoritos',
-                JSON.stringify(favoritosActualizados),
-            );
-
-            const items = JSON.parse(localStorage.getItem('swfavoritos'));
-            if (items.length === 0) localStorage.removeItem('swfavoritos');
-
-            return {
+            siguienteEstado = {
                 ...store,
                 favoritos: favoritosActualizados,
+                filtroActivo: nuevoFiltro,
             };
+            break;
         case 'BUSQUEDAS':
-            return {
-                ...store,
-                busquedas: action.payload,
-            };
+            siguienteEstado = { ...store, busquedas: action.payload };
+            break;
         default:
             return store;
     }
+
+    localStorage.setItem('galaxia_starwars', JSON.stringify(siguienteEstado));
+
+    return siguienteEstado;
 }
