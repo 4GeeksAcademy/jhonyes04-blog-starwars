@@ -12,7 +12,15 @@ const NOMBRES_TIPO = {
     locations: 'Lugar',
 };
 
-export const getData = async (dispatch, item, page = 1, limit = 20) => {
+const PAGINA_INICIAL = 1;
+const LIMITE_ELEMENTOS = 20;
+
+export const getData = async (
+    dispatch,
+    item,
+    page = PAGINA_INICIAL,
+    limit = LIMITE_ELEMENTOS,
+) => {
     try {
         const response = await fetch(
             URL_API + '/' + item + `?page=${page}&limit=${limit}`,
@@ -21,6 +29,10 @@ export const getData = async (dispatch, item, page = 1, limit = 20) => {
         if (!response.ok) throw new Error(`Error al obtener ${item}`);
 
         const data = await response.json();
+
+        // if (!data || !data.data) {
+        //     console.error('La API no devolvió el formato esperado:', data);
+        // }
 
         const dataMasTipo = data.data.map((datos) => ({
             ...datos,

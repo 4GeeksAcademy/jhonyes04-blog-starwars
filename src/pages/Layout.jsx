@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import { Outlet } from 'react-router-dom/dist';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -32,7 +31,6 @@ export const Layout = () => {
             <div className="sticky-top">
                 <Navbar />
             </div>
-            {/* <div className="linea"></div> */}
             <div className="flex-grow-1">
                 <Outlet />
             </div>

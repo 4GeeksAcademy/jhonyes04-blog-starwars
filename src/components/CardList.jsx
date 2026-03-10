@@ -1,9 +1,11 @@
 import { Card } from './Card';
 import useGlobalReducer from '../hooks/useGlobalReducer';
+import { Paginacion } from './Paginacion';
 
-export const CardList = ({ titulo, elementos }) => {
+export const CardList = ({ titulo, elementos, paginacion }) => {
     const { store, dispatch } = useGlobalReducer();
     const { favoritos, filtroActivo } = store;
+    const { page, totalPaginas, setPage, limit, setLimit } = paginacion || {};
 
     const elementosFiltrados =
         filtroActivo === 'todos'
@@ -13,7 +15,7 @@ export const CardList = ({ titulo, elementos }) => {
               );
 
     const renderizar = () => {
-        if (titulo.toLowerCase() !== 'favoritos' && elementos.length === 0) {
+        if (titulo !== 'Favoritos' && elementos.length === 0) {
             return (
                 <div className="d-flex flex-column align-items-center justify-content-center p-5">
                     <div
@@ -36,11 +38,31 @@ export const CardList = ({ titulo, elementos }) => {
         }
 
         return (
-            <div className="card-body row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                {elementosFiltrados.map((elemento) => (
-                    <Card key={elemento._id} elemento={elemento} />
-                ))}
-            </div>
+            <>
+                {mostrarPaginacion && (
+                    <Paginacion
+                        paginaActual={page}
+                        totalPaginas={totalPaginas}
+                        limit={limit}
+                        onCambiarPage={setPage}
+                        onCambiarLimit={setLimit}
+                    />
+                )}
+                <div className="card-body row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                    {elementosFiltrados.map((elemento) => (
+                        <Card key={elemento._id} elemento={elemento} />
+                    ))}
+                </div>
+                {mostrarPaginacion && (
+                    <Paginacion
+                        paginaActual={page}
+                        totalPaginas={totalPaginas}
+                        limit={limit}
+                        onCambiarPage={setPage}
+                        onCambiarLimit={setLimit}
+                    />
+                )}
+            </>
         );
     };
 
@@ -51,13 +73,17 @@ export const CardList = ({ titulo, elementos }) => {
         });
     };
 
+    const mostrarPaginacion =
+        filtroActivo === 'todos' && titulo !== 'Favoritos' && paginacion;
+
     return (
         <div className="container my-4">
             <div className="d-flex align-items-center bg-title mb-4 p-2">
                 <h1 className="text-warning m-0 ms-4 d-flex flex-grow-1">
                     {titulo}
                 </h1>
-                {titulo.toLowerCase() !== 'favoritos' && (
+
+                {titulo !== 'Favoritos' && (
                     <div className="d-flex flex-grow-0 gap-2 me-4">
                         <button
                             className={`btn btn-sm ${filtroActivo === 'todos' ? 'btn-warning fw-bold' : 'btn-outline-warning'}`}
