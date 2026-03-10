@@ -1,23 +1,16 @@
 import { useEffect, useState } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 import { Link, useNavigate } from 'react-router-dom';
-import { Home } from '../pages/Home';
 import { Badge } from './Badge';
 
 const ELEMENTOS_MOSTRAR = 5;
 
 export const Search = () => {
     const { store, dispatch } = useGlobalReducer();
-    const { personajes, vehiculos, lugares } = store;
+    const { coleccionCompleta } = store;
     const [encontrados, setEncontrados] = useState([]);
     const [busqueda, setBusqueda] = useState('');
     const navigate = useNavigate();
-
-    const todosElementos = [
-        ...(personajes || []),
-        ...(vehiculos || []),
-        ...(lugares || []),
-    ];
 
     useEffect(() => {
         if (busqueda.trim() === '') {
@@ -25,7 +18,7 @@ export const Search = () => {
             return;
         }
 
-        const filtrados = todosElementos.filter((item) => {
+        const filtrados = coleccionCompleta.filter((item) => {
             return item?.name?.toLowerCase().includes(busqueda.toLowerCase());
         });
 

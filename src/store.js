@@ -4,6 +4,7 @@ export const initialStore = () => {
     if (storeLocal) return JSON.parse(storeLocal);
 
     return {
+        coleccionCompleta: [],
         personajes: [],
         vehiculos: [],
         lugares: [],
@@ -11,6 +12,10 @@ export const initialStore = () => {
         busquedas: [],
         filtroActivo: 'todos',
     };
+};
+
+const actualizarColeccion = (estado) => {
+    return [...estado.personajes, ...estado.vehiculos, ...estado.lugares];
 };
 
 export default function storeReducer(store, action = {}) {
@@ -60,7 +65,11 @@ export default function storeReducer(store, action = {}) {
             return store;
     }
 
-    localStorage.setItem('galaxia_starwars', JSON.stringify(siguienteEstado));
+    if (action.type.startsWith('GET_')) {
+        siguienteEstado.coleccionCompleta =
+            actualizarColeccion(siguienteEstado);
+    }
 
+    localStorage.setItem('galaxia_starwars', JSON.stringify(siguienteEstado));
     return siguienteEstado;
 }
