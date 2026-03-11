@@ -7,10 +7,13 @@ export const Paginacion = ({
     onCambiarPage,
     onCambiarLimit,
 }) => {
+    const totalItemsAproximados = limit * totalPaginas;
+
+    const cantidadOpciones = Math.ceil(totalItemsAproximados / 10);
     const opcionesLimit = Array.from(
-        { length: 10 },
+        { length: cantidadOpciones },
         (_, index) => (index + 1) * 10,
-    );
+    ).filter((opcion) => opcion <= 100);
 
     return (
         <div className="d-flex flex-column flex-md-row justify-content-center aligh-items-center bg-title gap-3 my-2 p-2">
