@@ -8,6 +8,10 @@ export const initialStore = () => {
         personajes: [],
         vehiculos: [],
         lugares: [],
+        criaturas: [],
+        droides: [],
+        organizaciones: [],
+        especies: [],
         favoritos: [],
         busquedas: [],
         filtroActivo: 'todos',
@@ -15,7 +19,15 @@ export const initialStore = () => {
 };
 
 const actualizarColeccion = (estado) => {
-    return [...estado.personajes, ...estado.vehiculos, ...estado.lugares];
+    return [
+        ...estado.personajes,
+        ...estado.vehiculos,
+        ...estado.lugares,
+        ...estado.criaturas,
+        ...estado.droides,
+        ...estado.organizaciones,
+        ...estado.especies,
+    ];
 };
 
 export default function storeReducer(store, action = {}) {
@@ -29,6 +41,18 @@ export default function storeReducer(store, action = {}) {
             break;
         case 'GET_LOCATIONS':
             siguienteEstado = { ...store, lugares: action.payload };
+            break;
+        case 'GET_CREATURES':
+            siguienteEstado = { ...store, criaturas: action.payload };
+            break;
+        case 'GET_DROIDS':
+            siguienteEstado = { ...store, droides: action.payload };
+            break;
+        case 'GET_ORGANIZATIONS':
+            siguienteEstado = { ...store, organizaciones: action.payload };
+            break;
+        case 'GET_SPECIES':
+            siguienteEstado = { ...store, especies: action.payload };
             break;
         case 'FILTRO':
             siguienteEstado = { ...store, filtroActivo: action.payload };

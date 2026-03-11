@@ -16,7 +16,7 @@ export const Paginacion = ({
         <div className="d-flex flex-column flex-md-row justify-content-center aligh-items-center bg-title gap-3 my-2 p-2">
             <div className="d-flex justify-content-center align-items-center gap-2">
                 <button
-                    className="btn btn-sm btn-outline-warning px-4"
+                    className="btn btn-sm btn-outline-warning"
                     onClick={() => onCambiarPage(paginaActual - 1)}
                     disabled={paginaActual === 1}
                 >
@@ -28,7 +28,7 @@ export const Paginacion = ({
                 </span>
 
                 <button
-                    className="btn btn-sm btn-outline-warning px-4"
+                    className="btn btn-sm btn-outline-warning"
                     onClick={() => onCambiarPage(paginaActual + 1)}
                     disabled={paginaActual === totalPaginas}
                 >

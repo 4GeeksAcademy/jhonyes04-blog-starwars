@@ -38,7 +38,7 @@ export const Search = () => {
     };
 
     return (
-        <div className="bg-transparent position-relative">
+        <div className="bg-transparent position-relative flex-grow-1 w-100">
             <form onSubmit={(e) => e.preventDefault()}>
                 <div className="input-group">
                     <span className="input-group-text bg-warning border-end-0 border-warning">
@@ -46,7 +46,7 @@ export const Search = () => {
                     </span>
                     <input
                         type="search"
-                        className="form-control bg-transparent text-warning border-warning"
+                        className="form-control form-control bg-transparent text-warning border-warning"
                         placeholder="Buscar"
                         value={busqueda}
                         onChange={(e) => setBusqueda(e.target.value)}

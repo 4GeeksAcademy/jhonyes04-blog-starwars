@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
-export const NavbarLink = ({ to, label = '' }) => {
+export const NavbarLink = ({ to, label = '', onClick }) => {
     const { store } = useGlobalReducer();
     const { favoritos } = store;
 
@@ -10,6 +10,7 @@ export const NavbarLink = ({ to, label = '' }) => {
         return (
             <NavLink
                 to="/favoritos"
+                onClick={onClick}
                 className={({ isActive }) =>
                     `btn border-warning w-100 w-lg-auto d-flex align-items-center justify-content-center ${isActive ? 'btn-warning' : 'btn-dark bg-transparent'}`
                 }
@@ -33,6 +34,7 @@ export const NavbarLink = ({ to, label = '' }) => {
     return (
         <NavLink
             to={to}
+            onClick={onClick}
             className={({ isActive }) =>
                 `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning text-dark fw-bold' : 'btn-dark bg-transparent text-warning'}`
             }

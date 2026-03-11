@@ -9,7 +9,15 @@ import { getData } from '../api/starwars.api';
 // Base component that maintains the navbar and footer throughout the page and the scroll to top functionality.
 export const Layout = () => {
     const { store, dispatch } = useGlobalReducer();
-    const { personajes, vehiculos, lugares } = store;
+    const {
+        personajes,
+        vehiculos,
+        lugares,
+        criaturas,
+        droides,
+        organizaciones,
+        especies,
+    } = store;
 
     useEffect(() => {
         const obtenerDatos = async () => {
@@ -18,6 +26,12 @@ export const Layout = () => {
                     await getData(dispatch, 'characters');
                 if (vehiculos.length === 0) await getData(dispatch, 'vehicles');
                 if (lugares.length === 0) await getData(dispatch, 'locations');
+                if (criaturas.length === 0)
+                    await getData(dispatch, 'creatures');
+                if (droides.length === 0) await getData(dispatch, 'droids');
+                if (organizaciones.length === 0)
+                    await getData(dispatch, 'organizations');
+                if (especies.length === 0) await getData(dispatch, 'species');
             } catch (error) {
                 console.error('Error al obtener todos los datos:', error);
             }

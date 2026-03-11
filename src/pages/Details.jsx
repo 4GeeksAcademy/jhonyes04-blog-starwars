@@ -7,17 +7,16 @@ export const Details = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { store, dispatch } = useGlobalReducer();
-    const { personajes, vehiculos, lugares, favoritos } = store;
+    const { coleccionCompleta, favoritos } = store;
     const [detalles, setDetalles] = useState(null);
 
     useEffect(() => {
-        const todos = [...personajes, ...vehiculos, ...lugares];
-        const elementoEncontado = todos.find(
+        const elementoEncontado = coleccionCompleta.find(
             (item) => String(item._id) === String(id),
         );
 
         setDetalles(elementoEncontado);
-    }, [id, personajes, vehiculos, lugares]);
+    }, [id, coleccionCompleta]);
 
     useEffect(() => {
         const tooltipTriggerList = document.querySelectorAll(

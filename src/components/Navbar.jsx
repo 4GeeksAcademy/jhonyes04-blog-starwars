@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import logoUrl from '../assets/img/logo-starwars.png';
 import { Search } from './Search';
 import { NavbarLink } from './NavbarLink';
@@ -21,17 +21,61 @@ const MENU = [
         label: 'Lugares',
     },
     {
+        to: '/criaturas',
+        label: 'Criaturas',
+    },
+    {
+        to: '/droides',
+        label: 'Droides',
+    },
+    {
+        to: '/organizaciones',
+        label: 'Organizaciones',
+    },
+    {
+        to: '/especies',
+        label: 'Especies',
+    },
+    {
         to: '/favoritos',
         label: 'Favoritos',
     },
 ];
 
 export const Navbar = () => {
+    const localizacionActual = useLocation();
+    const seccionActiva = MENU.find(
+        (item) => item.to === localizacionActual.pathname,
+    );
+
+    const menuDropdown = MENU.filter(
+        (item) => item.to !== '/' && item.to !== '/favoritos',
+    );
+
+    const cerrarMenu = () => {
+        const elementoDropdown = document.getElementById('dropdownMenu');
+
+        if (elementoDropdown) {
+            const instance = bootstrap.Dropdown.getInstance(elementoDropdown);
+
+            if (instance) instance.hide();
+        }
+    };
+    const esDropdown = menuDropdown.some(
+        (item) => item.to === localizacionActual.pathname,
+    );
+
+    const textoBoton = esDropdown ? seccionActiva.label : 'Explorar';
+
+    const claseBoton = esDropdown
+        ? 'btn btn-warning dropdown-toggle fw-bold'
+        : 'btn btn-outline-warning dropdown-toggle fw-bold';
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-semitransparente top-0 z-3">
-            <div className="container d-flex justify-content-between align-items-center">
+        <nav className="navbar navbar-dark bg-semitransparente top-0 z-3">
+            <div className="container d-flex flex-column flex-md-row align-items-center">
                 {/* Logo */}
-                <Link to="/" className="navbar-brand me-4">
+                <Link to="/" className="navbar-brand me-3">
                     <img
                         src={logoUrl}
                         alt="logo"
@@ -45,36 +89,42 @@ export const Navbar = () => {
                     <Search />
                 </div>
 
-                {/* Botón hamburguesa */}
-                <button
-                    className="navbar-toggler border-warning ms-2"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarStarWars"
-                    aria-controls="navbarStarWars"
-                    aria-expanded="false"
-                    aria-label="Menú de navegación"
-                >
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                {/* Fin Botón hamburguesa */}
-
                 {/* Menú */}
-                <div
-                    id="navbarStarWars"
-                    className="collapse navbar-collapse flex-grow-0"
-                >
-                    <div className="navbar-nav ms-auto gap-2">
-                        {MENU.map((item, index) => (
-                            <NavbarLink
-                                to={item.to}
-                                label={item.label}
-                                key={index}
-                            />
-                        ))}
+                <div className="d-flex mx-auto mt-2 mt-md-0 flex-md-grow-0 gap-2">
+                    <NavbarLink to="/" label="Home" />
+
+                    <div className="dropdown">
+                        <button
+                            className={claseBoton}
+                            type="button"
+                            id="dropdownMenu"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <i className="fa-solid fa-jedi me-2"></i>
+                            {textoBoton}
+                        </button>
+
+                        <div
+                            id="dropdownMenu"
+                            className="dropdown-menu dropdown-menu-end bg-dark border-warning mt-2 px-2"
+                        >
+                            <div className="d-flex flex-column gap-2">
+                                {menuDropdown.map((item, index) => (
+                                    <NavbarLink
+                                        to={item.to}
+                                        label={item.label}
+                                        key={index}
+                                        onClick={cerrarMenu}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Fin Menú */}
                     </div>
+                    <NavbarLink to="/favoritos" label="Favoritos" />
                 </div>
-                {/* Fin Menú */}
             </div>
         </nav>
     );

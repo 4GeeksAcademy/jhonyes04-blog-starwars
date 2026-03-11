@@ -4,12 +4,20 @@ const TIPOS = {
     characters: 'GET_CHARACTERS',
     vehicles: 'GET_VEHICLES',
     locations: 'GET_LOCATIONS',
+    creatures: 'GET_CREATURES',
+    droids: 'GET_DROIDS',
+    organizations: 'GET_ORGANIZATIONS',
+    species: 'GET_SPECIES',
 };
 
 const NOMBRES_TIPO = {
     characters: 'Personaje',
     vehicles: 'Vehículo',
     locations: 'Lugar',
+    creatures: 'Criatura',
+    droids: 'Droide',
+    organizations: 'Organización',
+    species: 'Especie',
 };
 
 const PAGINA_INICIAL = 1;

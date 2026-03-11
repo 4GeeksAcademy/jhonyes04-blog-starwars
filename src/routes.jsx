@@ -9,11 +9,15 @@ import { Layout } from './pages/Layout';
 import { Home } from './pages/Home';
 import { Details } from './pages/Details';
 import { Error404 } from './pages/Error404';
+import { Favoritos } from './pages/Favoritos';
+import { Busquedas } from './pages/Busquedas';
 import { Personajes } from './pages/Personajes';
 import { Vehiculos } from './pages/Vehiculos';
 import { Lugares } from './pages/Lugares';
-import { Favoritos } from './pages/Favoritos';
-import { Busquedas } from './pages/Busquedas';
+import { Criaturas } from './pages/Criaturas';
+import { Droides } from './pages/Droides';
+import { Organizaciones } from './pages/Organizaciones';
+import { Especies } from './pages/Especies';
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -30,6 +34,10 @@ export const router = createBrowserRouter(
             <Route path="/personajes" index element={<Personajes />} />
             <Route path="/vehiculos" element={<Vehiculos />} />
             <Route path="/lugares" element={<Lugares />} />
+            <Route path="/criaturas" element={<Criaturas />} />
+            <Route path="/droides" element={<Droides />} />
+            <Route path="/organizaciones" element={<Organizaciones />} />
+            <Route path="/especies" element={<Especies />} />
             <Route path="/favoritos" element={<Favoritos />} />
             <Route path="/details/:id" element={<Details />} />
             <Route path="/busquedas" element={<Busquedas />} />
