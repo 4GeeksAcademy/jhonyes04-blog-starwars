@@ -62,7 +62,7 @@ export const Details = () => {
                     />
                 </div>
                 <div className="card-body d-flex flex-column">
-                    <h5 className="card-title">{detalles.name}</h5>
+                    <h5 className="card-title fw-bold">{detalles.name}</h5>
                     <p className="card-text text-justify">
                         {detalles.description}
                     </p>

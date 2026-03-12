@@ -54,7 +54,7 @@ export const Card = ({ elemento }) => {
                     />
                 </div>
                 <div className="card-body d-flex flex-column">
-                    <h5 className="card-title">{name}</h5>
+                    <h5 className="card-title fw-bold">{name}</h5>
                     <p className="card-text text-justify">{descripcionCorta}</p>
                     <div className="d-flex justify-content-between mt-auto">
                         <Link
