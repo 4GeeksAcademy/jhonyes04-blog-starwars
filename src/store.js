@@ -167,6 +167,15 @@ export default function storeReducer(store, action = {}) {
             actualizarColeccion(siguienteEstado);
     }
 
-    localStorage.setItem('galaxia_starwars', JSON.stringify(siguienteEstado));
+    const almacenamientoActual = localStorage.getItem('galaxia_startwars');
+    const nuevoAlmacenamiento = JSON.stringify(siguienteEstado);
+
+    if (almacenamientoActual !== nuevoAlmacenamiento) {
+        localStorage.setItem(
+            'galaxia_starwars',
+            JSON.stringify(nuevoAlmacenamiento),
+        );
+    }
+
     return siguienteEstado;
 }
