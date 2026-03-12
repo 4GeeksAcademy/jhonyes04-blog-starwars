@@ -1,5 +1,5 @@
 export const initialStore = () => {
-    const storeLocal = localStorage.getItem('galaxia_starwars');
+    const storeLocal = localStorage.getItem('nueva_galaxia_starwars');
 
     if (storeLocal) return JSON.parse(storeLocal);
 
@@ -167,12 +167,12 @@ export default function storeReducer(store, action = {}) {
             actualizarColeccion(siguienteEstado);
     }
 
-    const almacenamientoActual = localStorage.getItem('galaxia_startwars');
+    const almacenamientoActual = localStorage.getItem('nueva_galaxia_starwars');
     const nuevoAlmacenamiento = JSON.stringify(siguienteEstado);
 
     if (almacenamientoActual !== nuevoAlmacenamiento) {
         localStorage.setItem(
-            'galaxia_starwars',
+            'nueva_galaxia_starwars',
             JSON.stringify(nuevoAlmacenamiento),
         );
     }
