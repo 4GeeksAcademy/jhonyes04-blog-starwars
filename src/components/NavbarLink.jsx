@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import useGlobalReducer from '../hooks/useGlobalReducer';
-export const NavbarLink = ({ to, label = '', onClick }) => {
+export const NavbarLink = ({ to, label = '', onClick, total }) => {
     const { store } = useGlobalReducer();
     const { favoritos } = store;
 
@@ -39,7 +39,19 @@ export const NavbarLink = ({ to, label = '', onClick }) => {
                 `btn border-warning w-100 w-lg-auto ${isActive ? 'btn-warning text-dark fw-bold' : 'btn-dark bg-transparent text-warning'}`
             }
         >
-            {label}
+            {({ isActive }) => (
+                /* El div de Flexbox debe estar DENTRO de la función */
+                <div className="d-flex justify-content-between align-items-center w-100">
+                    <span>{label}</span>
+
+                    {/* El total con un estilo condicional si quieres que resalte diferente */}
+                    <span
+                        className={`badge ms-3 ${isActive ? 'bg-dark text-warning' : 'bg-warning text-dark'}`}
+                    >
+                        {total ? total : ''}
+                    </span>
+                </div>
+            )}
         </NavLink>
     );
 };

@@ -4,7 +4,9 @@ import { usePaginacion } from '../hooks/usePaginacion.jsx';
 
 export const Especies = () => {
     const { store, dispatch } = useGlobalReducer();
-    const { especies } = store;
+    const { especies, totales } = store;
+
+    const total = totales.find((total) => total.item === 'species')?.total || 0;
 
     const paginacion = usePaginacion(dispatch, 'species', especies);
 
@@ -13,6 +15,7 @@ export const Especies = () => {
             <CardList
                 titulo="Especies"
                 elementos={especies}
+                total={total}
                 paginacion={paginacion}
             />
         </>

@@ -1264,6 +1264,11 @@
             "graded": false,
             "files": [
                 {
+                    "path": "src/api",
+                    "name": "api",
+                    "hidden": true
+                },
+                {
                     "path": "src/assets",
                     "name": "assets",
                     "hidden": true
@@ -1299,11 +1304,6 @@
                     "hidden": false
                 },
                 {
-                    "path": "src/services",
-                    "name": "services",
-                    "hidden": true
-                },
-                {
                     "path": "src/store.js",
                     "name": "store.js",
                     "hidden": false
@@ -1315,5 +1315,5 @@
     "bugsLink": null,
     "videoSolutions": false,
     "localhostOnly": false,
-    "session": 2661853101270095400
+    "session": 4004950417852397600
 }

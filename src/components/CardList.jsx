@@ -2,7 +2,7 @@ import { Card } from './Card';
 import useGlobalReducer from '../hooks/useGlobalReducer';
 import { Paginacion } from './Paginacion';
 
-export const CardList = ({ titulo, elementos, paginacion }) => {
+export const CardList = ({ titulo, elementos, total, paginacion }) => {
     const { store, dispatch } = useGlobalReducer();
     const { favoritos, filtroActivo } = store;
     const { page, totalPaginas, setPage, limit, setLimit } = paginacion || {};
@@ -80,7 +80,8 @@ export const CardList = ({ titulo, elementos, paginacion }) => {
         <div className="container my-4">
             <div className="d-flex align-items-center bg-title mb-4 p-2">
                 <h1 className="text-warning m-0 ms-4 d-flex flex-grow-1">
-                    {titulo}
+                    <span className="me-2">{titulo}</span>
+                    <span className="badge bg-warning text-dark">{total}</span>
                 </h1>
 
                 {titulo !== 'Favoritos' && (

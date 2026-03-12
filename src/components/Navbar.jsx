@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import logoUrl from '../assets/img/logo-starwars.png';
 import { Search } from './Search';
 import { NavbarLink } from './NavbarLink';
+import useGlobalReducer from '../hooks/useGlobalReducer';
 
 const MENU = [
     {
@@ -42,8 +43,29 @@ const MENU = [
     },
 ];
 
+const LISTA_ITEMS = {
+    personajes: 'characters',
+    vehículos: 'vehicles',
+    lugares: 'locations',
+    criaturas: 'creatures',
+    droides: 'droids',
+    organizaciones: 'organizations',
+    especies: 'species',
+};
+
 export const Navbar = () => {
+    const { store } = useGlobalReducer();
+    const { totales } = store;
     const localizacionActual = useLocation();
+
+    const obtenerTotal = (label) => {
+        const total = totales.find(
+            (total) => total.item === LISTA_ITEMS[label.toLowerCase()],
+        );
+
+        return total ? total.total : 0;
+    };
+
     const seccionActiva = MENU.find(
         (item) => item.to === localizacionActual.pathname,
     );
@@ -61,9 +83,12 @@ export const Navbar = () => {
             if (instance) instance.hide();
         }
     };
+
     const esDropdown = menuDropdown.some(
         (item) => item.to === localizacionActual.pathname,
     );
+
+    const totalSeccion = esDropdown ? obtenerTotal(seccionActiva?.label) : 0;
 
     const textoBoton = esDropdown ? seccionActiva.label : 'Explorar';
 
@@ -102,7 +127,10 @@ export const Navbar = () => {
                             aria-expanded="false"
                         >
                             <i className="fa-solid fa-jedi me-2"></i>
-                            {textoBoton}
+                            <span className="me-2">{textoBoton}</span>
+                            <span className="badge bg-dark text-warning">
+                                {totalSeccion ? totalSeccion : ''}
+                            </span>
                         </button>
 
                         <div
@@ -116,6 +144,7 @@ export const Navbar = () => {
                                         label={item.label}
                                         key={index}
                                         onClick={cerrarMenu}
+                                        total={obtenerTotal(item.label)}
                                     />
                                 ))}
                             </div>

@@ -38,10 +38,6 @@ export const getData = async (
 
         const data = await response.json();
 
-        // if (!data || !data.data) {
-        //     console.error('La API no devolvió el formato esperado:', data);
-        // }
-
         const dataMasTipo = data.data.map((datos) => ({
             ...datos,
             tipo: NOMBRES_TIPO[item],
@@ -49,12 +45,15 @@ export const getData = async (
 
         dispatch({
             type: TIPOS[item],
-            payload: dataMasTipo,
+            payload: {
+                items: dataMasTipo,
+                total: data.info.total,
+            },
         });
 
         return data;
     } catch (error) {
         console.error(`Error al obtener ${item}:`, error);
-        return [];
+        return { items: [], total: 0 };
     }
 };

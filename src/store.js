@@ -4,6 +4,7 @@ export const initialStore = () => {
     if (storeLocal) return JSON.parse(storeLocal);
 
     return {
+        totales: [],
         coleccionCompleta: [],
         personajes: [],
         vehiculos: [],
@@ -30,29 +31,101 @@ const actualizarColeccion = (estado) => {
     ];
 };
 
+const actualizarTotales = (listaTotales, item, total) => {
+    const existe = listaTotales.find(
+        (elementoLista) => elementoLista.item === item,
+    );
+
+    if (existe) {
+        return listaTotales.map((elementoLista) =>
+            elementoLista.item === item
+                ? { ...elementoLista, total: total }
+                : elementoLista,
+        );
+    }
+
+    return [...listaTotales, { item: item, total: total }];
+};
+
 export default function storeReducer(store, action = {}) {
     let siguienteEstado;
     switch (action.type) {
         case 'GET_CHARACTERS':
-            siguienteEstado = { ...store, personajes: action.payload };
+            siguienteEstado = {
+                ...store,
+                personajes: action.payload.items,
+                totales: actualizarTotales(
+                    store.totales,
+                    'characters',
+                    action.payload.total,
+                ),
+            };
             break;
         case 'GET_VEHICLES':
-            siguienteEstado = { ...store, vehiculos: action.payload };
+            siguienteEstado = {
+                ...store,
+                vehiculos: action.payload.items,
+                totales: actualizarTotales(
+                    store.totales,
+                    'vehicles',
+                    action.payload.total,
+                ),
+            };
             break;
         case 'GET_LOCATIONS':
-            siguienteEstado = { ...store, lugares: action.payload };
+            siguienteEstado = {
+                ...store,
+                lugares: action.payload.items,
+                totales: actualizarTotales(
+                    store.totales,
+                    'locations',
+                    action.payload.total,
+                ),
+            };
             break;
         case 'GET_CREATURES':
-            siguienteEstado = { ...store, criaturas: action.payload };
+            siguienteEstado = {
+                ...store,
+                criaturas: action.payload.items,
+                totales: actualizarTotales(
+                    store.totales,
+                    'creatures',
+                    action.payload.total,
+                ),
+            };
             break;
         case 'GET_DROIDS':
-            siguienteEstado = { ...store, droides: action.payload };
+            siguienteEstado = {
+                ...store,
+                droides: action.payload.items,
+                totales: actualizarTotales(
+                    store.totales,
+                    'droids',
+                    action.payload.total,
+                ),
+            };
             break;
         case 'GET_ORGANIZATIONS':
-            siguienteEstado = { ...store, organizaciones: action.payload };
+            siguienteEstado = {
+                ...store,
+                organizaciones: action.payload.items,
+                totales: actualizarTotales(
+                    store.totales,
+                    'organizations',
+                    action.payload.total,
+                ),
+            };
             break;
         case 'GET_SPECIES':
-            siguienteEstado = { ...store, especies: action.payload };
+            siguienteEstado = {
+                ...store,
+                especies: action.payload.items,
+                totales: actualizarTotales(
+                    store.totales,
+                    `species`,
+                    action.payload.total,
+                ),
+            };
             break;
         case 'FILTRO':
             siguienteEstado = { ...store, filtroActivo: action.payload };
