@@ -9,14 +9,15 @@ export const Details = () => {
     const { store, dispatch } = useGlobalReducer();
     const { coleccionCompleta, favoritos } = store;
     const [detalles, setDetalles] = useState(null);
+    const todosRegistros = [...coleccionCompleta, ...favoritos];
 
     useEffect(() => {
-        const elementoEncontado = coleccionCompleta.find(
+        const elementoEncontado = todosRegistros.find(
             (item) => String(item._id) === String(id),
         );
 
         setDetalles(elementoEncontado);
-    }, [id, coleccionCompleta]);
+    }, [id, todosRegistros]);
 
     useEffect(() => {
         const tooltipTriggerList = document.querySelectorAll(
